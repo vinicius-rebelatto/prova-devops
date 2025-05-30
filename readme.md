@@ -1,6 +1,6 @@
 # node-api/Dockerfile
 
-FROM node:18-alpine (define a imagem a ser Dockerizada)
+FROM node:18-alpine <!--define a imagem a ser Dockerizada)-->
 WORKDIR /usr/src/app (Define o diretório da aplicação)
 COPY package*.json ./ (Copia as dependencias necessárias para rodar a aplicação em package.json)
 RUN npm install (Roda o comando de intalação da dependncias)
