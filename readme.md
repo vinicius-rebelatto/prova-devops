@@ -1,4 +1,4 @@
-#node-api/Dockerfile
+# node-api/Dockerfile
 
 FROM node:18-alpine (define a imagem a ser Dockerizada)
 WORKDIR /usr/src/app (Define o diretório da aplicação)
@@ -9,7 +9,7 @@ EXPOSE 3001 (Porta em que é exposto a aplicação)
 CMD ["node", "src/app.js"] (Comando para rodar a aplicação)
 
 
-#python-api/Dockerfile
+# python-api/Dockerfile
 
 FROM python:3.11-slim (define a imagem a ser Dockerizada)
 WORKDIR /app (Define o diretório da aplicação)
@@ -23,7 +23,7 @@ EXPOSE 3002 (Porta em que é exposto a aplicação)
 CMD ["python", "app.py"] (Comando para rodar a aplicação)
 
 
-#php-api/Dockerfile
+# php-api/Dockerfile
 
 FROM php:8.2-apache (define a imagem a ser Dockerizada)
 WORKDIR /var/www/html (Define o diretório da aplicação)
@@ -33,7 +33,7 @@ EXPOSE 80 (expõe na porta 80)
 CMD ["apache2-foreground"] (Comando para rodar a aplicação)
 
 
-#docker-compose.yml
+# docker-compose.yml
 
 version: '3.8'  (define a versão do compose)
 services:   (Dentro dele é definido os serviços, com seus respectivos arquivos Docker e que compõem a aplicação)
