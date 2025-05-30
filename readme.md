@@ -1,41 +1,60 @@
 # node-api/Dockerfile
 
-FROM node:18-alpine <!--define a imagem a ser Dockerizada)-->
+FROM node:18-alpine (define a imagem a ser Dockerizada)
+
 WORKDIR /usr/src/app (Define o diretório da aplicação)
+
 COPY package*.json ./ (Copia as dependencias necessárias para rodar a aplicação em package.json)
+
 RUN npm install (Roda o comando de intalação da dependncias)
+
 COPY . . (Copia os outros arquivos da aplicação, pois já copiamos o package.json anteriormente)
+
 EXPOSE 3001 (Porta em que é exposto a aplicação)
+
 CMD ["node", "src/app.js"] (Comando para rodar a aplicação)
 
 
 # python-api/Dockerfile
 
 FROM python:3.11-slim (define a imagem a ser Dockerizada)
+
 WORKDIR /app (Define o diretório da aplicação)
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends gcc python3-dev && \
     rm -rf /var/lib/apt/lists/* (Instala as dependencias do redis e do MySQL)
+
 COPY requirements.txt . (Copia o arquivo com as dependencias da aplicação)
+
 RUN pip install --no-cache-dir -r requirements.txt (Executa as dependencias copiadas em requirements.txt)
+
 COPY . . (Copia os outros arquivos da aplicação, pois já copiamos o requirements.txt anteriormente)
+
 EXPOSE 3002 (Porta em que é exposto a aplicação)
+
 CMD ["python", "app.py"] (Comando para rodar a aplicação)
 
 
 # php-api/Dockerfile
 
 FROM php:8.2-apache (define a imagem a ser Dockerizada)
+
 WORKDIR /var/www/html (Define o diretório da aplicação)
+
 COPY index.php . (Copia o index.php, pois é o único arquivo no deretória, além do Dockerfile)
+
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli (Instala a extensão para rodar o MySQL)
+
 EXPOSE 80 (expõe na porta 80)
+
 CMD ["apache2-foreground"] (Comando para rodar a aplicação)
 
 
 # docker-compose.yml
 
 version: '3.8'  (define a versão do compose)
+
 services:   (Dentro dele é definido os serviços, com seus respectivos arquivos Docker e que compõem a aplicação)
 
 redis:  (Serviço do rediz)
